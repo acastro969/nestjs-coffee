@@ -3,9 +3,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Flavor } from './flavor.entity';
+import { Rating } from '../../ratings/entities/rating.entity';
 
 @Entity()
 export class Coffee {
@@ -15,14 +17,11 @@ export class Coffee {
   @Column()
   name: string;
 
-  @Column({ nullable: true })
-  description: string;
-
   @Column()
   brand: string;
 
-  @Column({ default: 0 })
-  recommendations: number;
+  @OneToMany(() => Rating, (rating) => rating.coffee, { cascade: true })
+  ratings: Rating[];
 
   @JoinTable()
   @ManyToMany(() => Flavor, (flavor) => flavor.coffees, {

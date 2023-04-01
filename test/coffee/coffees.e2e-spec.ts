@@ -3,8 +3,8 @@ import { HttpServer, INestApplication } from '@nestjs/common/interfaces';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoffeesModule } from 'src/coffees/coffees.module';
-import { CreateCoffeeDto } from 'src/coffees/dto/create-coffee.dto';
-import { UpdateCoffeeDto } from 'src/coffees/dto/update-coffee.dto';
+import { CreateCoffeeDto } from 'src/coffees/dto/request/create-coffee.dto';
+import { UpdateCoffeeDto } from 'src/coffees/dto/request/update-coffee.dto';
 import * as request from 'supertest';
 
 describe('[Feature] Coffees - /coffees', () => {
