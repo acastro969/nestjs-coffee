@@ -34,7 +34,7 @@ export class CoffeesService {
     return plainToInstance(CoffeeResponseDto, coffees);
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<CoffeeResponseDto> {
     const coffee: Coffee = await this.coffeeRepository.findOne({
       where: { id: +id },
       relations: {
