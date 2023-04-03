@@ -146,6 +146,7 @@ At the moment, I am in the process of completing the information in this README.
 ## Getting Started: Important Information
 
 ### Modules
+---
 Modules in NestJS are classes annotated with the @Module() decorator, which provides metadata for organizing the application's structure.
 
 NestJS applications come with a root module which serves as the starting point for building the application graph. The application graph is an internal data structure used by NestJS to resolve module and provider relationships and dependencies.
@@ -178,12 +179,15 @@ export class CatsModule {}
 ```
 
 ### Providers
+---
 In NestJS, providers are classes that share functionality and resources by being injected into other classes. They can be services, helpers, or any other class providing functionality. The NestJS Dependency Injection system manages providers, allowing for easy swapping and greater modularity. Providers must be defined with the @Injectable() decorator and can be injected into other classes with the @Inject() decorator. Providers are a powerful tool for managing dependencies in a NestJS application.
 
 ### Custom Providers
+---
 (WIP)
 
 ### Config
+---
 Application configurations often vary depending on the environment they are deployed in. For example, database credentials for local development may differ from those used in production. To manage these differences, it is a best practice to store configuration settings in environment variables.
 
 In Node.JS .env files holding key-value pairs are used to represent each environment. This way running an app in different environments is just a matter of swapping the correct .env file.
@@ -193,16 +197,19 @@ A good approach for using this technique in Nest is to create a ConfigModule tha
 https://docs.nestjs.com/techniques/configuration
 
 ### Migrations
+---
 > "Migrations provide a way to incrementally update the database schema to keep it in sync with the application's data model while preserving existing data in the database. To generate, run, and revert migrations, TypeORM provides a dedicated CLI."
 
 Source: https://docs.nestjs.com/techniques/database#typeorm-transactions
 
 ### Decorators
+---
 Decorators are special TypeScript annotations that can be applied to classes, methods, and properties. They are defined using an expression that returns a function, which allows you to add metadata or modify the behavior of the decorated element.
 
 For example, you can use the @Controller decorator to mark a class as a controller, the @Get decorator to define a method as an HTTP GET endpoint, or the @Injectable decorator to mark a class as injectable.
 
 ### Custom Decorators
+---
 In order to make your code more readable you can create your own Decorators and reuse them across the code.
 
 For example, this is a decorator for transforming empty DTO values to undefined:
@@ -231,16 +238,34 @@ export class RatingResponseDto {
 ```
 
 ### Pipes
+---
 Pipes are classes annotated with the @Injectable() decorator which implements the PipeTransform interface. They typically have two use cases, one being transformation (ex: transforming input data) and the other one being validation (ex: validating input data and throwing an exception in case it's invalid).
 
+In both cases any transormation or validation operate on the arguments being processed by a controller route handler, this operations takes place BEFORE a method is invoked. After which the route handler is invoked with the (potentially) transformed arguments.
+
+Nest comes with some built-in pipes out-of-the-box, those are:
+- ValidationPipe
+- ParseIntPipe
+- ParseFloatPipe
+- ParseBoolPipe
+- ParseArrayPipe
+- ParseUUIDPipe
+- ParseEnumPipe
+- DefaultValuePipe
+- ParseFilePipe
+
 ### Interceptors
+---
 (WIP)
 
 ### Guards
+---
 (WIP)
 
 ### Middlewares
+---
 (WIP)
 
 ### Tests
+---
 (WIP)
