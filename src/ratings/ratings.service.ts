@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { Rating } from './entities/rating.entity';
 import { CreateRatingDto } from './dto/request/create-rating.dto';
 import { Coffee } from '../coffees/entities/coffee.entity';
+import { RatingResponseDto } from './dto/response/rating-response.dto';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class RatingsService {
@@ -14,7 +16,10 @@ export class RatingsService {
     private readonly ratingsRepository: Repository<Rating>,
   ) {}
 
-  async create(coffeeId: number, createRatingDto: CreateRatingDto) {
+  async create(
+    coffeeId: number,
+    createRatingDto: CreateRatingDto,
+  ): Promise<RatingResponseDto> {
     const coffee = await this.preloadCoffeeById(coffeeId);
 
     const rating = this.ratingsRepository.create({
@@ -22,7 +27,9 @@ export class RatingsService {
       ...createRatingDto,
     });
 
-    return this.ratingsRepository.save(rating);
+    const savedRating = this.ratingsRepository.save(rating);
+
+    return plainToInstance(RatingResponseDto, savedRating);
   }
 
   private async preloadCoffeeById(id: number) {
