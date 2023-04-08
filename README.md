@@ -147,9 +147,9 @@ At the moment, I am in the process of completing the information in this README.
 
 ### Modules
 ---
-Modules in NestJS are classes annotated with the @Module() decorator, which provides metadata for organizing the application's structure.
+Modules are classes annotated with the @Module() decorator, which provides metadata for organizing the application's structure.
 
-NestJS applications come with a root module which serves as the starting point for building the application graph. The application graph is an internal data structure used by NestJS to resolve module and provider relationships and dependencies.
+NestJS applications come with a root module which serves as the starting point for building the application graph, an internal data structure used by NestJS to resolve module and provider relationships and dependencies.
 
 While small applications may only need a root module, creating different modules is strongly recommended as an effective way of organizing components. For most applications, the resulting architecture will involve multiple modules that encapsulate closely related sets of capabilities.
 
@@ -180,11 +180,7 @@ export class CatsModule {}
 
 ### Providers
 ---
-In NestJS, providers are classes that share functionality and resources by being injected into other classes. They can be services, helpers, or any other class providing functionality. The NestJS Dependency Injection system manages providers, allowing for easy swapping and greater modularity. Providers must be defined with the @Injectable() decorator and can be injected into other classes with the @Inject() decorator. Providers are a powerful tool for managing dependencies in a NestJS application.
-
-### Custom Providers
----
-(WIP)
+Providers are classes that share functionality and resources by being injected into other classes. They can be services or any other class providing functionality. The NestJS Dependency Injection System manages providers, allowing for easy swapping and greater modularity. Providers must be defined with the @Injectable() decorator and can be injected into other classes with the @Inject() decorator. Providers are a powerful tool for managing dependencies in a NestJS application.
 
 ### Config
 ---
@@ -241,7 +237,7 @@ export class RatingResponseDto {
 ---
 Pipes are classes annotated with the @Injectable() decorator which implements the PipeTransform interface. They typically have two use cases, one being transformation (ex: transforming input data) and the other one being validation (ex: validating input data and throwing an exception in case it's invalid).
 
-In both cases any transormation or validation operate on the arguments being processed by a controller route handler, this operations takes place BEFORE a method is invoked. After which the route handler is invoked with the (potentially) transformed arguments.
+In both cases any transformation or validation operate on the arguments being processed by a controller route handler, this operations takes place BEFORE a method is invoked. After which the route handler is invoked with the (potentially) transformed arguments.
 
 Nest comes with some built-in pipes out-of-the-box, those are:
 - ValidationPipe
@@ -256,16 +252,32 @@ Nest comes with some built-in pipes out-of-the-box, those are:
 
 ### Interceptors
 ---
-(WIP)
+Interceptors have a set of capabilities and they are useful for:
+* binding extra logic before or after method execution
+* transforming the result returned from a function
+* transforming the exception thrown from a function
+* extending the basic function behavior
+* completely overriding a function depending on specific conditions
+
+Interceptors implements the intercept() method which takes two arguments. An instance of ExecutionContext (provides additional details about the current execution process) and a CallHandler instance.
 
 ### Guards
 ---
-(WIP)
+A guard is a class annotated with the @Injectable() decorator, which implements the CanActivate interface.
+
+Guards have the single responsibility of determining, depending on certain conditions (permissions, roles, etc.), if a given request will be handled by the route handler or not. This is often referred as authorization.
+
+They are executed after all middleware but before any interceptor or pipe.
 
 ### Middlewares
 ---
-(WIP)
+Middlewares are functions executed before the route handler. They have access to the request and response objects and they can perform the following tasks:
 
-### Tests
----
-(WIP)
+* Execute any code.
+* Make changes to the request and response objects.
+* End the request-response cycle.
+* Call the next middleware function in the stack.
+
+If the current middleware function does not end the request-response cycle, it must call next() to pass control to the next middleware function. Otherwise, the request will be left hanging.
+
+To implement custom Nest middleware in either a function, or in a class with an @Injectable() decorator. The class should implement the NestMiddleware interface.
