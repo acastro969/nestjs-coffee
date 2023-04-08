@@ -12,6 +12,6 @@ export class Rating {
   @Column({ default: null })
   comments: string;
 
-  @ManyToOne(() => Coffee, (coffee) => coffee)
+  @ManyToOne(() => Coffee, (coffee) => coffee, { onDelete: 'CASCADE' })
   coffee: Coffee;
 }
