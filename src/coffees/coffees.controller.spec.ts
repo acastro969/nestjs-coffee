@@ -24,7 +24,7 @@ describe('CoffeesController', () => {
   };
   const coffees: CoffeeResponseDto[] = [coffee];
   const coffeeId = 1;
-  const invalidCoffeId = 10;
+  const invalidCoffeeId = 10;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -96,32 +96,32 @@ describe('CoffeesController', () => {
       jest.spyOn(service, 'findOne').mockReturnValue(null);
 
       try {
-        await controller.findOne(invalidCoffeId);
+        await controller.findOne(invalidCoffeeId);
       } catch (err) {
         expect(err).toBeInstanceOf(NotFoundException);
-        expect(err.message).toEqual(`Coffee #${invalidCoffeId} not found`);
+        expect(err.message).toEqual(`Coffee #${invalidCoffeeId} not found`);
       }
     });
   });
 
   describe('create', () => {
-    const createCoffeDto: CreateCoffeeDto = {
+    const createCoffeeDto: CreateCoffeeDto = {
       name: 'Coffee',
       brand: 'NestJS',
       flavors: [],
     };
 
-    const savedCoffe: CoffeeResponseDto = {
+    const savedCoffee: CoffeeResponseDto = {
       id: 1,
-      ...createCoffeDto,
+      ...createCoffeeDto,
       flavors: [],
       ratings: [],
     };
 
     it('should create a coffee and return it', async () => {
-      jest.spyOn(service, 'create').mockImplementation(async () => savedCoffe);
+      jest.spyOn(service, 'create').mockImplementation(async () => savedCoffee);
 
-      expect(await controller.create(createCoffeDto)).toEqual(savedCoffe);
+      expect(await controller.create(createCoffeeDto)).toEqual(savedCoffee);
     });
   });
 
@@ -152,10 +152,10 @@ describe('CoffeesController', () => {
       jest.spyOn(service, 'update').mockReturnValue(null);
 
       try {
-        await controller.update(invalidCoffeId, updateCoffeeDto);
+        await controller.update(invalidCoffeeId, updateCoffeeDto);
       } catch (err) {
         expect(err).toBeInstanceOf(NotFoundException);
-        expect(err.message).toEqual(`Coffee #${invalidCoffeId} not found`);
+        expect(err.message).toEqual(`Coffee #${invalidCoffeeId} not found`);
       }
     });
   });
@@ -181,10 +181,10 @@ describe('CoffeesController', () => {
       jest.spyOn(service, 'remove').mockReturnValue(null);
 
       try {
-        await controller.remove(invalidCoffeId);
+        await controller.remove(invalidCoffeeId);
       } catch (err) {
         expect(err).toBeInstanceOf(NotFoundException);
-        expect(err.message).toEqual(`Coffee #${invalidCoffeId} not found`);
+        expect(err.message).toEqual(`Coffee #${invalidCoffeeId} not found`);
       }
     });
   });

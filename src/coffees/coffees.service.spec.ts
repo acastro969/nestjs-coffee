@@ -55,7 +55,7 @@ describe('CoffeesService', () => {
         expect(coffee).toEqual(expectedCoffee);
       });
     });
-    describe('othwerise', () => {
+    describe('otherwise', () => {
       it('should throw the "NotFoundException"', async () => {
         const coffeeId = 1;
 
