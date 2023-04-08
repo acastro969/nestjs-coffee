@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { ClassSerializerInterceptor } from '@nestjs/common/serializer';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { TimeoutInterceptor } from './common/interceptors/timeout/timeout.interceptor';
@@ -16,6 +17,7 @@ async function bootstrap() {
       },
     }),
   );
+
   app.useGlobalInterceptors(new TimeoutInterceptor());
 
   const options = new DocumentBuilder()
