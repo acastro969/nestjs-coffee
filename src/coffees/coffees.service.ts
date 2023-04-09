@@ -9,7 +9,7 @@ import { Flavor } from './entities/flavor.entity';
 import { CoffeeResponseDto } from './dto/response/coffee-response.dto';
 import { plainToInstance } from 'class-transformer';
 
-@Injectable()
+@Injectable() // Marks the class as a provider. Providers can be injected into other classes through the constructor
 export class CoffeesService {
   constructor(
     @InjectRepository(Coffee)
@@ -37,7 +37,7 @@ export class CoffeesService {
   async findOne(id: number): Promise<CoffeeResponseDto> {
     const coffee: Coffee = await this.coffeeRepository.findOne({
       where: { id: +id },
-      relations: {
+      relations: { // Joins entities
         flavors: true,
         ratings: true,
       },
@@ -73,7 +73,7 @@ export class CoffeesService {
         updateCoffeeDto.flavors.map((name) => this.preloadFlavorByName(name)),
       ));
 
-    const coffee = await this.coffeeRepository.preload({
+    const coffee = await this.coffeeRepository.preload({ // Creates a new entity. If it already exists in the database, it is loaded and its values are replaced with the new ones
       id: +id,
       ...updateCoffeeDto,
       flavors,
@@ -102,7 +102,7 @@ export class CoffeesService {
     return plainToInstance(CoffeeResponseDto, removedCoffee);
   }
 
-  private async preloadFlavorByName(name: string): Promise<Flavor> {
+  private async preloadFlavorByName(name: string): Promise<Flavor> { // Finds the flavor by its name. If it doesn't exist, it creates it (but doesn't save it)
     const existingFlavor = await this.flavorRepository.findOne({
       where: { name },
     });

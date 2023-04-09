@@ -23,7 +23,7 @@ export class Coffee {
   @OneToMany(() => Rating, (rating) => rating.coffee)
   ratings: Rating[];
 
-  @JoinTable()
+  @JoinTable() // Specifies the owner side of the relationship
   @ManyToMany(() => Flavor, (flavor) => flavor.coffees, { cascade: true })
   flavors: Flavor[];
 }

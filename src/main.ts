@@ -8,6 +8,7 @@ import { TimeoutInterceptor } from './common/interceptors/timeout/timeout.interc
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
+    // Registers global pipes for use in HTTP route handling. Pipes allow for validations and transformations to be performed
     new ValidationPipe({
       whitelist: true,
       transform: true,
