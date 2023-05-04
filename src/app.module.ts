@@ -15,17 +15,18 @@ import dbConfiguration from './config/db.config';
       isGlobal: true,
       load: [dbConfiguration],
     }),
+    CoffeesModule,
     TypeOrmModule.forRootAsync({
       // forRootAsync es una función asincrónica que se utiliza para configurar las opciones de provider para un módulo durante la importación, es útil para casos como la obtención de datos desde un servidor remoto o la lectura de un archivo de configuración. Por lo general, devuelve una promise que se resuelve a un módulo que se utilizará en el resto de la aplicación
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         ...configService.get('database'),
       }),
-      imports: [],
     }),
-    CoffeesModule,
     RatingsModule,
     CommonModule,
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
