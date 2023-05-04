@@ -2,9 +2,9 @@ import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { HttpServer, INestApplication } from '@nestjs/common/interfaces';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CoffeesModule } from 'src/coffees/coffees.module';
-import { CreateCoffeeDto } from 'src/coffees/dto/request/create-coffee.dto';
-import { UpdateCoffeeDto } from 'src/coffees/dto/request/update-coffee.dto';
+import { CoffeesModule } from '../../src/coffees/coffees.module';
+import { CreateCoffeeDto } from '../../src/coffees/dto/request/create-coffee.dto';
+import { UpdateCoffeeDto } from '../../src/coffees/dto/request/update-coffee.dto';
 import * as request from 'supertest';
 
 describe('[Feature] Coffees - /coffees', () => {
@@ -28,11 +28,11 @@ describe('[Feature] Coffees - /coffees', () => {
         CoffeesModule,
         TypeOrmModule.forRoot({
           type: 'postgres',
-          host: process.env.DATABASE_HOST,
-          port: +process.env.DATABASE_PORT,
-          username: process.env.DATABASE_USER,
-          password: process.env.DATABASE_PASSWORD,
-          database: process.env.DATABASE_NAME,
+          host: process.env.TESTING_DATABASE_HOST,
+          port: +process.env.TESTING_DATABASE_PORT,
+          username: process.env.TESTING_DATABASE_USER,
+          password: process.env.TESTING_DATABASE_PASSWORD,
+          database: process.env.TESTING_DATABASE_NAME,
           autoLoadEntities: true,
           synchronize: true,
         }),
@@ -72,7 +72,7 @@ describe('[Feature] Coffees - /coffees', () => {
       });
   });
 
-  it.todo('Get all [GET /]', () => {
+  it('Get all [GET /]', () => {
     return request(httpServer)
       .get('/coffees')
       .then(({ body }) => {
@@ -81,7 +81,7 @@ describe('[Feature] Coffees - /coffees', () => {
       });
   });
 
-  it.todo('Get one [GET /:id]', () => {
+  it('Get one [GET /:id]', () => {
     return request(httpServer)
       .get('/coffees/1')
       .then(({ body }) => {
@@ -89,7 +89,7 @@ describe('[Feature] Coffees - /coffees', () => {
       });
   });
 
-  it.todo('Update one [PATCH /:id]', () => {
+  it('Update one [PATCH /:id]', () => {
     const updateCoffeeDto: UpdateCoffeeDto = {
       ...coffee,
       name: 'New and Improved Shipwreck Roast',
@@ -108,7 +108,7 @@ describe('[Feature] Coffees - /coffees', () => {
       });
   });
 
-  it.todo('Delete one [DELETE /:id]', () => {
+  it('Delete one [DELETE /:id]', () => {
     return request(httpServer)
       .delete('/coffees/1')
       .expect(HttpStatus.OK)
