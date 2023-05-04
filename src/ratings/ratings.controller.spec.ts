@@ -45,7 +45,9 @@ describe('RatingsController', () => {
     it('should create a rating and return it', async () => {
       jest.spyOn(service, 'create').mockImplementation(async () => savedRating);
 
-      expect(await controller.create(coffeeId, createRatingDto)).toEqual(savedRating);
+      expect(await controller.create(coffeeId, createRatingDto)).toEqual(
+        savedRating,
+      );
     });
   });
 });

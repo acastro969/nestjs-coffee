@@ -22,12 +22,14 @@ export class CoffeesController {
 
   @Public()
   @Get()
-  findAll(@Query() paginationQuery: PaginationQueryDto) { // Function name doesn't do anything by itself
+  findAll(@Query() paginationQuery: PaginationQueryDto) {
+    // Function name doesn't do anything by itself
     return this.coffeesService.findAll(paginationQuery);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) { // The @Param() decorator is used for dynamic URL parameters. For query parameters, the correct decorator is @Query()
+  findOne(@Param('id') id: number) {
+    // The @Param() decorator is used for dynamic URL parameters. For query parameters, the correct decorator is @Query()
     return this.coffeesService.findOne(id);
   }
 

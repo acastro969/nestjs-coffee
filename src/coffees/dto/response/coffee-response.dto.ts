@@ -9,7 +9,7 @@ export class CoffeeResponseDto {
 
   readonly brand: string;
 
-  @Type(() => FlavorResponseDto)
+  @Type(() => FlavorResponseDto) // Manually specifies the type of the property
   readonly flavors: FlavorResponseDto[];
 
   @Type(() => RatingResponseDto)

@@ -11,7 +11,7 @@ import { Rating } from '../../ratings/entities/rating.entity';
 
 @Entity()
 export class Coffee {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn() // Marks the property as a Column and makes it auto incremental
   id: number;
 
   @Column()
