@@ -7,14 +7,14 @@ import { IS_PUBLIC_KEY } from '../../decorators/public.decorator';
 
 @Injectable()
 export class ApiKeyGuard implements CanActivate {
-  // A guard is a class annotated with the @Injectable() decorator, which implements the CanActivate interface. Guards have the single responsibility of determining, depending on certain conditions (permissions, roles, etc.), if a given request will be handled by the route handler or not. This is often referred as authorization
+  // Un guard es una clase anotada con el decorador @Injectable(), que implementa la interfaz CanActivate. Los guards tienen la responsabilidad de determinar, dependiendo de ciertas condiciones (permisos, roles, etc.), si una solicitud será manejada por el route handler o no. Esto se conoce como autorización
   constructor(
     private readonly reflector: Reflector,
     private readonly configService: ConfigService,
   ) {}
 
   canActivate(
-    context: ExecutionContext, // Details about the current request pipeline
+    context: ExecutionContext, // Detalles acerca de la pipeline de solicitudes actuales
   ): boolean | Promise<boolean> | Observable<boolean> {
     const isPublic = this.reflector.get(IS_PUBLIC_KEY, context.getHandler());
     if (isPublic) return true;

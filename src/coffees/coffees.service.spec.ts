@@ -10,7 +10,7 @@ type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 const createMockRepository = <T = any>(): MockRepository<T> => ({
   findOne: jest.fn(),
   create: jest.fn(),
-}); // Represents an object that consists of some of the properties of the repository, but with all the values being of type Jest Mock
+}); // Representa un objeto que consta de algunas de las propiedades del repositorio, pero con todos los valores siendo del tipo Jest Mock
 
 describe('CoffeesService', () => {
   let service: CoffeesService;
@@ -33,7 +33,7 @@ describe('CoffeesService', () => {
           useValue: createMockRepository(),
         },
       ],
-    }).compile(); // Bootstraps the module with its dependencies, similar to the way we bootstrap our application in our main.ts file with .create(). It returns a testing module instance
+    }).compile(); // Inicia el módulo con sus dependencias, de manera similar a cómo iniciamos nuestra aplicación en el archivo main.ts con .create(). Retorna una instancia de módulo de testing
 
     service = module.get<CoffeesService>(CoffeesService);
     coffeeRepository = module.get<MockRepository>(getRepositoryToken(Coffee));

@@ -10,7 +10,7 @@ import { Coffee } from '../coffees/entities/coffee.entity';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Coffee, Rating]),
-    CoffeesModule, // If CoffeesModule exported the CoffeesService, it means importing the CoffeesModule will give me access to the CoffeesService
+    CoffeesModule, // Si el módulo CoffeesModule exporta CoffeesService, significa que al importar CoffeesModule tendremos acceso a CoffeesService.
     ConfigModule,
   ],
   providers: [RatingsService],

@@ -7,20 +7,21 @@ import { CommonModule } from './common/common.module';
 import dbConfiguration from './config/db.config';
 
 @Module({
-  // Modules provide metadata for organizing the application's structure. This is the root module which serves as the starting point for building the application graph (an internal data structure used by NestJS to resolve module and provider relationships and dependencies). While small applications may only need a root module, creating different modules is strongly recommended as an effective way of organizing components, each encapsulating closely related sets of capabilities. Using modules helps manage complexity and develop with SOLID principles, particularly as the size of the application and/or team grows
+  // Los modulos proveen metadatos para organizar la estructura de la aplicación. Este es el módulo raíz que sirve como punto de partida para construir el application graph (una estructura de datos interna utilizada por NestJS para resolver las relaciones de módulos, providers y las dependencias). Si bien las aplicaciones pequeñas pueden llevar solo un módulo raíz, se recomienda crear diferentes módulos como una forma efectiva de organizar los componentes, cada uno encapsulando conjuntos de capacidades estrechamente relacionados. El uso de módulos ayuda a manejar la complejidad y desarrollar con principios SOLID, especialmente a medida que el tamaño de la aplicación y/o del equipo crece
   imports: [
-    // List of modules required by the current module
+    // Lista de módulos requeridos por el módulo actual
     ConfigModule.forRoot({
-      // Loads environment variables and registers custom configurations globally
+      // Carga variables de entorno y registra configuraciones personalizadas de forma global
       isGlobal: true,
       load: [dbConfiguration],
     }),
     TypeOrmModule.forRootAsync({
-      // forRootAsync is an asynchronous function that is used to configure provider options for a module during import, its useful for cases like fetching data from a remote server or reading a configuration file. It typically returns a promise that resolves to a module to be used by the rest of the application
+      // forRootAsync es una función asincrónica que se utiliza para configurar las opciones de provider para un módulo durante la importación, es útil para casos como la obtención de datos desde un servidor remoto o la lectura de un archivo de configuración. Por lo general, devuelve una promise que se resuelve a un módulo que se utilizará en el resto de la aplicación
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         ...configService.get('database'),
       }),
+      imports: [],
     }),
     CoffeesModule,
     RatingsModule,

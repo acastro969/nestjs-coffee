@@ -1,5 +1,9 @@
-import { HttpStatus, ValidationPipe } from '@nestjs/common';
-import { HttpServer, INestApplication } from '@nestjs/common/interfaces';
+import {
+  HttpServer,
+  INestApplication,
+  HttpStatus,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoffeesModule } from 'src/coffees/coffees.module';
@@ -90,20 +94,23 @@ describe('[Feature] Coffees - /coffees', () => {
   });
 
   it.todo('Update one [PATCH /:id]', () => {
+    const newName = 'New and Improved Shipwreck Roast';
+
     const updateCoffeeDto: UpdateCoffeeDto = {
       ...coffee,
-      name: 'New and Improved Shipwreck Roast',
+      name: newName,
     };
+
     return request(httpServer)
       .patch('/coffees/1')
       .send(updateCoffeeDto)
       .then(({ body }) => {
-        expect(body.name).toEqual(updateCoffeeDto.name);
+        expect(body.name).toEqual(newName);
 
         return request(httpServer)
           .get('/coffees/1')
           .then(({ body }) => {
-            expect(body.name).toEqual(updateCoffeeDto.name);
+            expect(body.name).toEqual(newName);
           });
       });
   });

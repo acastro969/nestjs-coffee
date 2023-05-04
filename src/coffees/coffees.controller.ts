@@ -18,18 +18,18 @@ import { UpdateCoffeeDto } from './dto/request/update-coffee.dto';
 @ApiTags('coffees')
 @Controller('coffees')
 export class CoffeesController {
-  constructor(private readonly coffeesService: CoffeesService) {} // Injects the CoffeesService into the CoffeesController. This dependency injection is managed by the Nest runtime. When an instance of the CoffeesController is created, Nest automatically finds the required dependency of CoffeesService. It checks if an instance of the service already exists, and if not, it creates a new instance and returns it. If CoffeesService has other dependencies, Nest resolves them in the correct order as well
+  constructor(private readonly coffeesService: CoffeesService) {} // Inyecta el servicio CoffeesService en el controlador CoffeesController. Esta inyección de dependencia es gestionada en tiempo de ejecución por Nest. Cuando se crea una instancia de CoffeesController, Nest encuentra automáticamente la dependencia requerida de CoffeesService. Verifica si ya existe una instancia del servicio y, de no ser así, crea una nueva instancia y la devuelve. Si CoffeesService tiene otras dependencias, Nest tambien las resuelve en el orden correcto
 
   @Public()
   @Get()
   findAll(@Query() paginationQuery: PaginationQueryDto) {
-    // Function name doesn't do anything by itself
+    // El nombre de la función no hace nada por sí solo
     return this.coffeesService.findAll(paginationQuery);
   }
 
   @Get(':id')
   findOne(@Param('id') id: number) {
-    // The @Param() decorator is used for dynamic URL parameters. For query parameters, the correct decorator is @Query()
+    // El decorador @Param() se utiliza para los parámetros de URL dinámicos. Para los query params, el decorador correcto es @Query()
     return this.coffeesService.findOne(id);
   }
 

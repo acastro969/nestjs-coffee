@@ -7,10 +7,10 @@ import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 
 @Module({
-  // CoffeesController and CoffeesService are closely related, so it makes sense to move them into this feature module. Which organizes code relevant for a specific feature, keeping code organized and establishing clear boundaries
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor]), ConfigModule], // Configure a module of set entities in a specific feature module
-  controllers: [CoffeesController], // Registers the module controllers, which have to be present for Nest to instantiate them
-  providers: [CoffeesService], // Registers the providers to be instantiated that may be shared across this module
-  exports: [CoffeesService], // List of providers that need to be available to other modules
+  // CoffeesController y CoffeesService están estrechamente relacionados, por lo que tiene sentido moverlos a este feature module. Esto organiza el código relevante para una funcionalidad específica, mantiene el código organizado y establece límites claros
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor]), ConfigModule], // Configura un set especifico de entidades para un feature module
+  controllers: [CoffeesController], // Registra los controladores del módulo, que deben estar presentes para que Nest los instancie
+  providers: [CoffeesService], // Registra los proveedores que se deben instanciar y deben ser compartidos en todo este módulo
+  exports: [CoffeesService], // Lista de proveedores que deben estar disponibles para otros módulos
 })
 export class CoffeesModule {}

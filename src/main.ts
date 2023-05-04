@@ -8,19 +8,19 @@ import { TimeoutInterceptor } from './common/interceptors/timeout/timeout.interc
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(
-    // Registers global pipes for every HTTP route handler. Pipes allow for validations and transformations to be performed
+    // Registra pipes globales para cada controlador de ruta HTTP. Los pipes permiten realizar validaciones y transformaciones en los datos que se reciben en las solicitudes HTTP
     new ValidationPipe({
-      whitelist: true, // Eliminates non (class-validator) decorated properties on requests to prevent malicious data
-      transform: true, // Automatically parses the incoming data to the expected types. If it cannot be transformed it will throw a BadRequestException. Eg: If the incoming data is a string that can be parsed as a number, it will automatically convert it
-      forbidNonWhitelisted: true, // Instead of eliminating non decorated properties it will throw an exception
+      whitelist: true, // Elimina las propiedades no decoradas con class-validator de las solicitudes para evitar datos maliciosos
+      transform: true, // Parsea automaticamente los datos entrantes al tipo de dato esperado. Si no se puede transformar, se lanzará una excepción BadRequestException. Por ejemplo, si los datos entrantes son un string que se puede parsear a numero, se convertirá automaticamente
+      forbidNonWhitelisted: true, // En lugar de eliminar propiedades no decoradas, lanzará una excepción
       transformOptions: {
-        enableImplicitConversion: true, // It will attempt to convert data to the expected types using the JavaScript's built-in type conversion rules in addition to any explicit conversions based on the expected types of your classes
+        enableImplicitConversion: true, // Intentará convertir los datos a los tipos esperados utilizando las reglas de conversión de tipos de JavaScript, además de cualquier conversión explicita basada en los tipos esperados en las clases
       },
     }),
   );
 
   app.useGlobalInterceptors(
-    // Registers global interceptors for every HTTP route handler.
+    // Registra interceptors globales para cada HTTP route handler
     new TimeoutInterceptor(),
     new ClassSerializerInterceptor(app.get(Reflector), {
       exposeUnsetFields: false,
@@ -35,6 +35,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000); // Starts the application in the desired port
+  await app.listen(3000); // Inicia la aplicación en el puerto indicado
 }
 bootstrap();

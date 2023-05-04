@@ -11,7 +11,7 @@ import { Rating } from '../../ratings/entities/rating.entity';
 
 @Entity()
 export class Coffee {
-  @PrimaryGeneratedColumn() // Marks the property as a Column and makes it auto incremental
+  @PrimaryGeneratedColumn() // Marca la propiedad como Columna y la hace autoincremental
   id: number;
 
   @Column()
@@ -23,7 +23,7 @@ export class Coffee {
   @OneToMany(() => Rating, (rating) => rating.coffee)
   ratings: Rating[];
 
-  @JoinTable() // Specifies the owner side of the relationship
+  @JoinTable() // Especifica el lado propietario de la relación
   @ManyToMany(() => Flavor, (flavor) => flavor.coffees, { cascade: true })
   flavors: Flavor[];
 }

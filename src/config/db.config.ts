@@ -13,7 +13,7 @@ export default registerAs('database', () => {
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
     autoLoadEntities: true,
-    synchronize: true, // Disable on production, it creates/updates data structures on the database based on the existing entities. It can cause data loss
+    synchronize: true, // Deshabilitar en producción on production, crea/actualiza estructuras de datos en la base de datos basándose en las entidades existentes. Puede causar pérdida de datos
     entities: [Coffee, Flavor, Rating],
   };
 });

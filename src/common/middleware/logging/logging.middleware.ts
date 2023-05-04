@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 
 @Injectable()
 export class LoggingMiddleware implements NestMiddleware {
-  // Middlewares are functions executed before the route handler. They have access to the request and response objects and can execute code, make changes to requests and responses, etc.
+  // Los middlewares son funciones ejecutadas antes del controlador de ruta. Tienen acceso a los objetos de solicitud y respuesta y pueden ejecutar código, realizar cambios en las solicitudes y respuestas, etc.
   use(req: any, res: any, next: () => void) {
     console.time('Request-response time');
 

@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
 export class CreateCoffeeDto {
-  @ApiProperty({ description: 'The name of a coffee.' }) // For documentation proposes
-  @IsString() // Class-validator decorator, throws BadRequestException if the validation fails
+  @ApiProperty({ description: 'The name of a coffee.' }) // Para fines de documentación
+  @IsString() // Decorador de class-validator, arroja una excepción BadRequestException si la validación falla
   readonly name: string;
 
   @ApiProperty({ description: 'The brand of a coffee.' })
